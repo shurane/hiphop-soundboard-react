@@ -37,13 +37,21 @@ body {
   padding: 0;
 }
 
+/* for an explanation of 3d button effect */
+/* https://designmodo.com/3d-css3-button/ */
 .grid-item {
   width: 150px;
   height: 100px;
   margin: 10px;
-  color:white;
-  background-color:black;
-  border:1px solid black;
+  background: linear-gradient(#000, #282828);
+  border:1px solid #282828;
   border-radius:5px;
   text-align:center;
+}
+
+/* need a way for the box shadow to be shrunk by the size we are moving the button on :active state */
+.grid-item:active {
+  /*box-shadow:0px 2px gray;*/
+  transform: translate(0, 3px);
+  transition: all 0.2s ease-in-out;
 }

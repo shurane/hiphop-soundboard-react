@@ -2,34 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-// https://stackoverflow.com/a/1484514
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-// TODO go to ES6
-// potentially unused in the future
-function getHolderUrl(text) {
-  return "holder.js/150x100" +
-    "?bg=" + getRandomColor() +
-    "&text=" + text;
-}
-
-function playClip(source){
-  var audio = new Audio(source);
-  audio.play();
-}
-
-// box shadow should have a random color, we set it dynamically here
-function getBoxShadow() {
-  return { boxShadow:'0px 5px #' + getRandomColor() };
-}
-
 const clips = [
   {
     file : "clips/beastieboys_anotherdimension.mp3",
@@ -142,12 +114,48 @@ const clips = [
   }
 ];
 
+// https://stackoverflow.com/a/1484514
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// TODO go to ES6
+// potentially unused in the future
+function getHolderUrl(text) {
+  return "holder.js/150x100" +
+    "?bg=" + getRandomColor() +
+    "&text=" + text;
+}
+
+function playClip(source){
+  var audio = new Audio(source);
+  audio.play();
+}
+
+// box shadow should have a random color, we set it dynamically here
+// along with text color to match
+function setAccentColor(color) {
+  return { boxShadow:'0 5px #' + color, color: '#' + color};
+}
+
 // TODO remove the ugly inner div code once we get rid of Holder.js
 class SoundItem extends Component {
-  // TODO should we use state?
+  // TODO should we use state? yes we should
+  constructor() {
+    super();
+    this.state = {
+      accentColor:getRandomColor()
+    }
+  }
+
   render() {
     return (
-      <div className="grid-item" style={getBoxShadow()} onClick={() => playClip(this.props.clip.file)}>
+      <div className="grid-item" style={setAccentColor(this.state.accentColor)} onClick={() => playClip(this.props.clip.file)}>
         {this.props.clip.name/* <img data-src={getHolderUrl(this.props.clip.name)}/> */}
       </div>
     );

@@ -23,8 +23,12 @@
   to { transform: rotate(360deg); }
 }
 
-.grid {
+body {
   background-color: gray;
+}
+
+.grid {
+  /*background-color: gray;*/
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -36,6 +40,10 @@
 .grid-item {
   width: 150px;
   height: 100px;
- /* border: 10px solid gray; */
   margin: 10px;
+  color:white;
+  background-color:black;
+  border:1px solid black;
+  border-radius:5px;
+  text-align:center;
 }

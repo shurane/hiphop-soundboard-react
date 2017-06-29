@@ -13,6 +13,7 @@ function getRandomColor() {
 }
 
 // TODO go to ES6
+// potentially unused in the future
 function getHolderUrl(text) {
   return "holder.js/150x100" +
     "?bg=" + getRandomColor() +
@@ -22,6 +23,11 @@ function getHolderUrl(text) {
 function playClip(source){
   var audio = new Audio(source);
   audio.play();
+}
+
+// box shadow should have a random color, we set it dynamically here
+function getBoxShadow() {
+  return { boxShadow:'0px 5px #' + getRandomColor() };
 }
 
 const clips = [
@@ -136,12 +142,13 @@ const clips = [
   }
 ];
 
+// TODO remove the ugly inner div code once we get rid of Holder.js
 class SoundItem extends Component {
   // TODO should we use state?
   render() {
     return (
-      <div className="grid-item" onClick={() => playClip(this.props.clip.file)}>
-        <img data-src={getHolderUrl(this.props.clip.name)}/>
+      <div className="grid-item" style={getBoxShadow()} onClick={() => playClip(this.props.clip.file)}>
+        {this.props.clip.name/* <img data-src={getHolderUrl(this.props.clip.name)}/> */}
       </div>
     );
   }
